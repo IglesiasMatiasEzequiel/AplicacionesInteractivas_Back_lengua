@@ -1,5 +1,5 @@
 {
-  "name": "aplicacionesinteractivas_back_mate",
+  "name": "aplicacionesinteractivas_back_lengua",
   "version": "1.0.0",
   "description": "backend aplicaciones interactivas",
   "main": "app.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LaggerP/AplicacionesInteractivas_Back_mate.git"
+    "url": "git+https://github.com/IglesiasMatiasEzequiel/AplicacionesInteractivas_Back_lengua.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LaggerP/AplicacionesInteractivas_Back_mate/issues"
+    "url": "https://github.com/IglesiasMatiasEzequiel/AplicacionesInteractivas_Back_lengua/issues"
   },
-  "homepage": "https://github.com/LaggerP/AplicacionesInteractivas_Back_mate#readme",
+  "homepage": "https://github.com/IglesiasMatiasEzequiel/AplicacionesInteractivas_Back_lengua#readme",
   "dependencies": {
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
