@@ -26,15 +26,15 @@ module.exports = {
 		}
 	},
 
-	async registerUser(user) {
+	async registerUser(idUsuario) {
 		try {
 			// Creating token for new user
 			var token = jwt.sign({
-				id: user.id
+				id: idUsuario
 			}, process.env.SECRET || DEV_SECRET, {
 				expiresIn: 86400 // expires in 24 hours
 			});
-			return { token: token, idUsuario: user.id};
+			return token;
 
 		} catch (e) {
 			// return a Error message describing the reason 

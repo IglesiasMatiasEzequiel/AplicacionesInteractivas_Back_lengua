@@ -32,9 +32,10 @@ module.exports = {
 					status: req.body.status
 				},
 			})
-			.then(async user => {
-				let response = await auth.registerUser(user);
-				return res.status(200).json({ idUsuario: response.idUsuario, token: response.token, message: "Succesfully Created User" })
+			.then(async users => {
+				var idUsuario = users[0].dataValues.id;
+				let token = await auth.registerUser(idUsuario);
+				return res.status(200).json({ idUsuario: idUsuario, token: token, message: "Succesfully Created User" })
 			})
 			.catch(error => res.status(400).json({error: error, message: "Register error"}))
 	},
