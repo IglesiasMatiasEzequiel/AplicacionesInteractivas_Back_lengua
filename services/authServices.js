@@ -34,7 +34,7 @@ module.exports = {
 			}, process.env.SECRET || DEV_SECRET, {
 				expiresIn: 86400 // expires in 24 hours
 			});
-			return token;
+			return { token: token, idUsuario: user.id};
 
 		} catch (e) {
 			// return a Error message describing the reason 

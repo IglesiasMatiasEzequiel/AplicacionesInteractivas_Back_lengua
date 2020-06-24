@@ -12,9 +12,7 @@ module.exports = {
 			password: req.body.password,
 		}
 		try {
-			// get token from user (if exists)
 			let response = await auth.loginUser(user);
-			
 			return res.status(200).json({ idUsuario: response.idUsuario, token: response.token, message: "Success login" })
 		}
 		catch (e) {
@@ -35,8 +33,8 @@ module.exports = {
 				},
 			})
 			.then(async user => {
-				let registerToken = await auth.registerUser(user)
-				return res.status(200).json({ token: registerToken, message: "Succesfully Created User" })
+				let response = await auth.registerUser(user);
+				return res.status(200).json({ idUsuario: response.idUsuario, token: response.token, message: "Succesfully Created User" })
 			})
 			.catch(error => res.status(400).json({error: error, message: "Register error"}))
 	},
