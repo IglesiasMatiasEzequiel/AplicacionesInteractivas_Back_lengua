@@ -3,7 +3,6 @@ const users = require('../models').usuarios;
 const auth = require('../services/authServices');
 const bcrypt = require("bcrypt");
 const BCRYPT_ROUNDS = require('../config/config.js').BCRYPT_ROUNDS
-const initialRankSave = require('../controllers/ranking').initialRankSave
 
 
 module.exports = {
@@ -14,9 +13,9 @@ module.exports = {
 		}
 		try {
 			// get token from user (if exists)
-			let loginToken = await auth.loginUser(user);
+			let response = await auth.loginUser(user);
 			
-			return res.status(200).json({ token: loginToken, message: "Success login" })
+			return res.status(200).json({ idUsuario: response.idUsuario, token: response.token, message: "Success login" })
 		}
 		catch (e) {
 			return res.status(400).json({ status: 400, message: "Invalid username or password" })
@@ -36,7 +35,6 @@ module.exports = {
 				},
 			})
 			.then(async user => {
-				initialRankSave(req.body.username)
 				let registerToken = await auth.registerUser(user)
 				return res.status(200).json({ token: registerToken, message: "Succesfully Created User" })
 			})

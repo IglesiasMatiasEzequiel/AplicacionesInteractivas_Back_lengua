@@ -1,24 +1,30 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-	const participacion = sequelize.define('participacion', {
-		usuario_id: DataTypes.INTEGER,
-		juego_id: DataTypes.INTEGER,
-		status: DataTypes.CHAR
-	}, {});
-	participacion.associate = function (models) {
-		// associations can be defined here
-		participacion.belongsTo(models.usuarios,
+  const Participacion = sequelize.define('Participacion', {
+    idUsuario: DataTypes.INTEGER,
+    idJuego: DataTypes.INTEGER,
+    idNivel: DataTypes.INTEGER,
+    puntaje: DataTypes.INTEGER
+  }, {});
+  Participacion.associate = function(models) {
+    Participacion.belongsTo(models.usuarios,
 			{
-				as: 'usuario',
-				foreignKey: 'usuario_id',
+        as: 'usuario',
+        foreignKey: 'idUsuario'
+			}
+    );
+    Participacion.belongsTo(models.Juego,
+			{
+        as: 'juego',
+        foreignKey: 'idJuego'
+			}
+    );
+    Participacion.belongsTo(models.Nivel,
+			{
+        as: 'nivel',
+        foreignKey: 'idNivel'
 			}
 		);
-		participacion.belongsTo(models.billetesjuegos,
-			{
-				as: 'juego',
-				foreignKey: 'juego_id',
-			}
-		);
-	};
-	return participacion;
+  };
+  return Participacion;
 };

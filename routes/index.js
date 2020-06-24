@@ -1,8 +1,7 @@
 /* Controllers */
 const usuariosController = require('../controllers/usuarios');
-const billetesJuegosController = require('../controllers/billetesjuegos');
+const juegosController = require('../controllers/juegos');
 const participacionController = require('../controllers/participacion');
-const rankingController = require('../controllers/ranking');
 const auth = require ('../auth/authToken.js')
 
 module.exports = (app) => {
@@ -16,22 +15,12 @@ module.exports = (app) => {
 	app.get('/api/usuarios/list', auth, usuariosController.list);
 	app.get('/api/usuarios/find', auth, usuariosController.findUserByUsername);
 
-	// Billetes juegos services
-	app.post('/api/billetesjuegos/create', billetesJuegosController.create);
-	app.get('/api/billetesjuegos/list', auth, billetesJuegosController.list);
-	app.get('/api/billetesjuegos/find', auth, billetesJuegosController.findGameByName);
-	app.get('/api/billetesjuegos/find/:level', auth, billetesJuegosController.findGameByLevel);
+	// Juegos services
+	app.get('/api/juegos/list', auth, juegosController.list);
+	app.get('/api/juegos/getById', auth, juegosController.getById);
 
 	// Participacion services
-	app.post('/api/participacion/create', participacionController.create);
-	app.get('/api/participacion/list', participacionController.list);
-	app.get('/api/participacion/find/:id', participacionController.findParticipacionById);
-
-	// Ranking services
-	app.post('/api/ranking/create', rankingController.initialRankSave);
-	app.patch('/api/ranking/update_billetes', auth, rankingController.updateBilletes);
-	app.patch('/api/ranking/update_sumas', auth, rankingController.updateSumas);
-	app.patch('/api/ranking/update_multi', auth, rankingController.updateMultiplicacion);
-	app.get('/api/ranking/list', auth, rankingController.list);
-	app.get('/api/ranking/find/', auth, rankingController.findRankingByUsername);
+	app.post('/api/participacion/create', auth, participacionController.createParticipacion);
+	app.get('/api/participacion/listRanking', auth, participacionController.listRanking);	
+	app.get('/api/participacion/listRankingByJuego', auth, participacionController.listRankingByJuego);	
 };

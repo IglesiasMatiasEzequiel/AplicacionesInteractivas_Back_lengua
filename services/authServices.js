@@ -19,7 +19,7 @@ module.exports = {
 			}, process.env.SECRET || DEV_SECRET, {
 				expiresIn: 86400 // expires in 24 hours
 			});
-			return token;
+			return { token: token, idUsuario: _details.id};
 		} catch (e) {
 			// return a Error message describing the reason     
 			throw Error("Error while Login User")
