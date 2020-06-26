@@ -2,8 +2,9 @@ const Sequelize = require('sequelize');
 const users = require('../models').usuarios;
 const auth = require('../services/authServices');
 const bcrypt = require("bcrypt");
-const BCRYPT_ROUNDS = require('../config/config.js').BCRYPT_ROUNDS
-
+const BCRYPT_ROUNDS = require('../config/config.js').BCRYPT_ROUNDS;
+const SECRET = process.env.SECRET || require('../config/config').DEV_SECRET;
+const jwt = require('jsonwebtoken');
 
 module.exports = {
 	async login(req, res) {
