@@ -12,13 +12,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       palabra: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       silabas: {
         type: Sequelize.INTEGER
       },
       imgPath: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

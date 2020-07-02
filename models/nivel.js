@@ -21,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'idNivel'
       }
     );
+    Nivel.hasMany(models.Preguntas,
+      {
+        as: 'preguntas',
+        foreignKey: 'idNivel'
+      }
+    );
 
     Nivel.belongsTo(models.Juego, { foreignKey: 'idJuego' });
   };

@@ -4,6 +4,7 @@ const nivel = require('../models').Nivel;
 const palabra = require('../models').Palabra;
 const opcion = require('../models').Opcion;
 const opcionValor = require('../models').OpcionValor;
+const preguntas = require('../models').Preguntas;
 
 module.exports = {
 
@@ -24,16 +25,21 @@ module.exports = {
 					as: 'palabras'
 				},
 				{
+					model: preguntas,
+					as: 'preguntas',
+			 	},
+				{
 					model: opcion,
 					as: 'opciones',
 					include: [{
 						model: opcionValor,
 						as: 'valores'
 					}]
-				}]
+				}],
 			}]
 		})
 			.then(juego => res.status(200).send(juego))
 			.catch(error => res.status(400).send(error))
 	},
+
 };
