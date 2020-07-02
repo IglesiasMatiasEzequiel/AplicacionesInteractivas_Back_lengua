@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
    jwt.verify(token, SECRET, (err) => {
       if (err) {
          log('no token provided...', 'err')
-         res.status(500).json({ error: "Not Authorized" });
+         res.status(401).json({ error: "Not Authorized" });
       } else {
          log('token provided... :star::star::star:', 'ok')
          next();

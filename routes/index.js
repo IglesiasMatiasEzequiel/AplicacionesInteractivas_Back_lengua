@@ -11,7 +11,8 @@ module.exports = (app) => {
 
 	// User services
 	app.post('/api/auth/login', usuariosController.login)
-	app.post('/api/auth/register', usuariosController.register);
+	app.post('/api/auth/register', usuariosController.register);	
+
 	app.get('/api/usuarios/list', auth, usuariosController.list);
 	app.get('/api/usuarios/find', auth, usuariosController.findUserByUsername);
 
