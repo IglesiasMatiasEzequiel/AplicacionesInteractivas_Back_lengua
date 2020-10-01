@@ -6,15 +6,8 @@ module.exports = (app) => {
 		message: 'Example project did not give you access to the api web services',
 	}));
 
-	app.post('/api/backupUsuario', usuariosController.backupUsuario);
-	app.post('/api/backupIngreso', usuariosController.backupIngreso);
-	app.post('/api/backupEgreso', usuariosController.backupEgreso);
-	app.post('/api/backupCuenta', usuariosController.backupCuenta);
-	app.post('/api/backupInversion', usuariosController.backupInversion);
-	app.post('/api/backupPrestamo', usuariosController.backupPrestamo);
-	app.post('/api/backupPresupuesto', usuariosController.backupPresupuesto);
-	app.post('/api/backupTarjeta', usuariosController.backupTarjeta);
-
+	app.post('/api/createUsuario', usuariosController.createUsuario);
+	app.post('/api/backup', usuariosController.backup);
 	app.post('/api/deleteByIdUsuario', usuariosController.deleteByIdUsuario);
 	app.get('/api/getByIdUsuario', usuariosController.getByIdUsuario);
 	
