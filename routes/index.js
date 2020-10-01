@@ -14,5 +14,8 @@ module.exports = (app) => {
 	app.post('/api/backupPrestamo', usuariosController.backupPrestamo);
 	app.post('/api/backupPresupuesto', usuariosController.backupPresupuesto);
 	app.post('/api/backupTarjeta', usuariosController.backupTarjeta);
+
+	app.post('/api/deleteByIdUsuario', usuariosController.deleteByIdUsuario);
+	app.get('/api/getByIdUsuario', usuariosController.getByIdUsuario);
 	
 };

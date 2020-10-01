@@ -88,10 +88,10 @@ module.exports = {
         idUsuario: req.body.idUsuario,
         idBanco: req.body.idBanco,
         idEntidadEmisora: req.body.idEntidadEmisora,
-		tarjeta: req.body.tarjeta,
-		vencimiento: req.body.vencimiento,
-		cierreResumen: req.body.cierreResumen,
-		vencimientoResumen: req.body.vencimientoResumen,
+        tarjeta: req.body.tarjeta,
+        vencimiento: req.body.vencimiento,
+        cierreResumen: req.body.cierreResumen,
+        vencimientoResumen: req.body.vencimientoResumen,
       })
       .then((items) => {
         return res.status(200).json({ status: 200, items: items });
@@ -105,11 +105,11 @@ module.exports = {
         idUsuario: req.body.idUsuario,
         idTipo: req.body.idTipo,
         idCuenta: req.body.idCuenta,
-		fechaInicio: req.body.fechaInicio,
-		fechaVencimiento: req.body.fechaVencimiento,
-		monto: req.body.monto,
-		nombre: req.body.nombre,
-		duracion: req.body.duracion,
+        fechaInicio: req.body.fechaInicio,
+        fechaVencimiento: req.body.fechaVencimiento,
+        monto: req.body.monto,
+        nombre: req.body.nombre,
+        duracion: req.body.duracion,
       })
       .then((items) => {
         return res.status(200).json({ status: 200, items: items });
@@ -123,11 +123,11 @@ module.exports = {
         idUsuario: req.body.idUsuario,
         idTipo: req.body.idTipo,
         idCuenta: req.body.idCuenta,
-		emisorDesinatario: req.body.emisorDesinatario,
-		intereses: req.body.intereses,
-		monto: req.body.monto,
-		cuota: req.body.cuota,
-		vencimiento: req.body.vencimiento,
+        emisorDesinatario: req.body.emisorDesinatario,
+        intereses: req.body.intereses,
+        monto: req.body.monto,
+        cuota: req.body.cuota,
+        vencimiento: req.body.vencimiento,
       })
       .then((items) => {
         return res.status(200).json({ status: 200, items: items });
@@ -141,10 +141,51 @@ module.exports = {
         idUsuario: req.body.idUsuario,
         idCategoriaEgreso: req.body.idCategoriaEgreso,
         fechaInicio: req.body.fechaInicio,
-		monto: req.body.monto
+        monto: req.body.monto,
       })
       .then((items) => {
         return res.status(200).json({ status: 200, items: items });
+      })
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
+  },
+
+  deleteByIdUsuario(req, res) {
+    return Promise.all([
+      ingresos.destroy({ where: { idUsuario: req.body.idUsuario } }),
+      egresos.destroy({ where: { idUsuario: req.body.idUsuario } }),
+      cuentas.destroy({ where: { idUsuario: req.body.idUsuario } }),
+      tarjetas.destroy({ where: { idUsuario: req.body.idUsuario } }),
+      inversiones.destroy({ where: { idUsuario: req.body.idUsuario } }),
+      prestamos.destroy({ where: { idUsuario: req.body.idUsuario } }),
+      presupuestos.destroy({ where: { idUsuario: req.body.idUsuario } }),
+    ])
+      .then((items) => {
+        return res.status(200).json({ status: 200, items: items });
+      })
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
+  },
+
+  getByIdUsuario(req, res) {
+    return Promise.all([
+      ingresos.findAll({ where: { idUsuario: req.body.idUsuario } }),
+      egresos.findAll({ where: { idUsuario: req.body.idUsuario } }),
+      cuentas.findAll({ where: { idUsuario: req.body.idUsuario } }),
+      tarjetas.findAll({ where: { idUsuario: req.body.idUsuario } }),
+      inversiones.findAll({ where: { idUsuario: req.body.idUsuario } }),
+      prestamos.findAll({ where: { idUsuario: req.body.idUsuario } }),
+      presupuestos.findAll({ where: { idUsuario: req.body.idUsuario } })
+    ])
+      .then((items) => {
+        return res.status(200).json({ 
+			status: 200, 
+			ingresos: items[0],
+			egresos: items[1],
+			cuentas: items[2],
+			tarjetas: items[3],
+			inversiones: items[4],
+			prestamos: items[5],
+			presupuestos: items[6],
+		});
       })
       .catch((error) => res.status(400).json({ status: 400, error: error }));
   },
