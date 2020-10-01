@@ -9,6 +9,6 @@ module.exports = (app) => {
 	app.post('/api/createUsuario', usuariosController.createUsuario);
 	app.post('/api/backup', usuariosController.backup);
 	app.post('/api/deleteByIdUsuario', usuariosController.deleteByIdUsuario);
-	app.get('/api/getByIdUsuario', usuariosController.getByIdUsuario);
+	app.post('/api/getByIdUsuario', usuariosController.getByIdUsuario);
 	
 };
