@@ -1,5 +1,11 @@
 const usuarios = require('../models').Usuarios;
 const ingresos = require('../models').Ingresos;
+const egresos = require('../models').Egresos;
+const cuentas = require('../models').Cuenta;
+const tarjetas = require('../models').Tarjeta;
+const inversiones = require('../models').Inversiones;
+const prestamos = require('../models').Prestamos;
+const presupuestos = require('../models').Presupuesto;
 
 module.exports = {
   backupUsuario(req, res) {
@@ -11,13 +17,9 @@ module.exports = {
         password: req.body.password,
       })
       .then((items) => {
-        return res
-          .status(200)
-          .json({ status: 200, items: items });
+        return res.status(200).json({ status: 200, items: items });
       })
-      .catch((error) =>
-        res.status(400).json({ status: 400, error: error })
-      );
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
   },
 
   backupIngreso(req, res) {
@@ -34,47 +36,116 @@ module.exports = {
         descripcion: req.body.descripcion,
       })
       .then((items) => {
-        return res
-          .status(200)
-          .json({ status: 200, items: items });
+        return res.status(200).json({ status: 200, items: items });
       })
-      .catch((error) =>
-	  res.status(400).json({ status: 400, error: error })
-      );
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
   },
 
-  list(_, res, next) {
-    return usuario
-      .findAll({})
-      .then((usuarios) => res.status(200).send(usuarios))
-      .catch((error) => res.status(400).send(error));
+  backupEgreso(req, res) {
+    return egresos
+      .create({
+        idUsuario: req.body.idUsuario,
+        idTipoEgreso: req.body.idTipoEgreso,
+        idCategoriaEgreso: req.body.idCategoriaEgreso,
+        idMedioPago: req.body.idMedioPago,
+        idTarjeta: req.body.idTarjeta,
+        idCuenta: req.body.idCuenta,
+        fecha: req.body.fecha,
+        monto: req.body.monto,
+        detalleEgreso: req.body.detalleEgreso,
+        cuotas: req.body.cuotas,
+        nroCuota: req.body.nroCuota,
+        proxVencimiento: req.body.proxVencimiento,
+      })
+      .then((items) => {
+        return res.status(200).json({ status: 200, items: items });
+      })
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
   },
 
-  // async getById(req, res) {
-  // 	return juego.findOne({
-  // 		where: { id: req.query.id },
-  // 		include: [{
-  // 			model: nivel,
-  // 			as: 'niveles',
-  // 			include: [{
-  // 				model: palabra,
-  // 				as: 'palabras'
-  // 			},
-  // 			{
-  // 				model: preguntas,
-  // 				as: 'preguntas',
-  // 		 	},
-  // 			{
-  // 				model: opcion,
-  // 				as: 'opciones',
-  // 				include: [{
-  // 					model: opcionValor,
-  // 					as: 'valores'
-  // 				}]
-  // 			}],
-  // 		}]
-  // 	})
-  // 		.then(juego => res.status(200).send(juego))
-  // 		.catch(error => res.status(400).send(error))
-  // },
+  backupCuenta(req, res) {
+    return cuentas
+      .create({
+        idUsuario: req.body.idUsuario,
+        idBanco: req.body.idBanco,
+        idEntidadEmisora: req.body.idEntidadEmisora,
+        cbu: req.body.cbu,
+        alias: req.body.alias,
+        descripcion: req.body.descripcion,
+        vencimiento: req.body.vencimiento,
+        monto: req.body.monto,
+        tarjeta: req.body.tarjeta,
+      })
+      .then((items) => {
+        return res.status(200).json({ status: 200, items: items });
+      })
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
+  },
+
+  backupTarjeta(req, res) {
+    return tarjetas
+      .create({
+        idUsuario: req.body.idUsuario,
+        idBanco: req.body.idBanco,
+        idEntidadEmisora: req.body.idEntidadEmisora,
+		tarjeta: req.body.tarjeta,
+		vencimiento: req.body.vencimiento,
+		cierreResumen: req.body.cierreResumen,
+		vencimientoResumen: req.body.vencimientoResumen,
+      })
+      .then((items) => {
+        return res.status(200).json({ status: 200, items: items });
+      })
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
+  },
+
+  backupInversion(req, res) {
+    return inversiones
+      .create({
+        idUsuario: req.body.idUsuario,
+        idTipo: req.body.idTipo,
+        idCuenta: req.body.idCuenta,
+		fechaInicio: req.body.fechaInicio,
+		fechaVencimiento: req.body.fechaVencimiento,
+		monto: req.body.monto,
+		nombre: req.body.nombre,
+		duracion: req.body.duracion,
+      })
+      .then((items) => {
+        return res.status(200).json({ status: 200, items: items });
+      })
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
+  },
+
+  backupPrestamo(req, res) {
+    return prestamos
+      .create({
+        idUsuario: req.body.idUsuario,
+        idTipo: req.body.idTipo,
+        idCuenta: req.body.idCuenta,
+		emisorDesinatario: req.body.emisorDesinatario,
+		intereses: req.body.intereses,
+		monto: req.body.monto,
+		cuota: req.body.cuota,
+		vencimiento: req.body.vencimiento,
+      })
+      .then((items) => {
+        return res.status(200).json({ status: 200, items: items });
+      })
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
+  },
+
+  backupPresupuesto(req, res) {
+    return presupuestos
+      .create({
+        idUsuario: req.body.idUsuario,
+        idCategoriaEgreso: req.body.idCategoriaEgreso,
+        fechaInicio: req.body.fechaInicio,
+		monto: req.body.monto
+      })
+      .then((items) => {
+        return res.status(200).json({ status: 200, items: items });
+      })
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
+  },
 };
