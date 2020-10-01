@@ -1,55 +1,80 @@
-const Sequelize = require('sequelize');
-const users = require('../models').usuarios;
-const auth = require('../services/authServices');
-const bcrypt = require("bcrypt");
-const BCRYPT_ROUNDS = require('../config/config.js').BCRYPT_ROUNDS;
-const SECRET = process.env.SECRET || require('../config/config').DEV_SECRET;
-const jwt = require('jsonwebtoken');
+const usuarios = require('../models').Usuarios;
+const ingresos = require('../models').Ingresos;
 
 module.exports = {
-	async login(req, res) {
-		let user = {
-			username: req.body.username,
-			password: req.body.password,
-		}
-		try {
-			let response = await auth.loginUser(user);
-			return res.status(200).json({ idUsuario: response.idUsuario, token: response.token, message: "Success login" })
-		}
-		catch (e) {
-			return res.status(400).json({ status: 400, message: "Invalid username or password" })
-		}
-	},
+  backupUsuario(req, res) {
+    return usuarios
+      .create({
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        email: req.body.email,
+        password: req.body.password,
+      })
+      .then((items) => {
+        return res
+          .status(200)
+          .json({ status: 200, items: items });
+      })
+      .catch((error) =>
+        res.status(400).json({ status: 400, error: error })
+      );
+  },
 
-	register(req, res) {
-		return users
-			.findOrCreate({
-				where: {
-					username: req.body.username,
-				},
-				defaults: {
-					username: req.body.username,
-					password: bcrypt.hashSync(req.body.password, BCRYPT_ROUNDS),
-					status: req.body.status
-				},
-			})
-			.then(async users => {
-				var idUsuario = users[0].dataValues.id;
-				let token = await auth.registerUser(idUsuario);
-				return res.status(200).json({ idUsuario: idUsuario, token: token, message: "Succesfully Created User" })
-			})
-			.catch(error => res.status(400).json({error: error, message: "Register error"}))
-	},
+  backupIngreso(req, res) {
+    return ingresos
+      .create({
+        idUsuario: req.body.idUsuario,
+        idTipoIngreso: req.body.idTipoIngreso,
+        idCategoriaIngreso: req.body.idCategoriaIngreso,
+        idDestinoIngreso: req.body.idDestinoIngreso,
+        idCuenta: req.body.idCuenta,
+        fecha: req.body.fecha,
+        idCuenta: req.body.descripcion,
+        monto: req.body.monto,
+        descripcion: req.body.descripcion,
+      })
+      .then((items) => {
+        return res
+          .status(200)
+          .json({ status: 200, items: items });
+      })
+      .catch((error) =>
+	  res.status(400).json({ status: 400, error: error })
+      );
+  },
 
-	list(_, res, next) {
-		return users.findAll({})
-			.then(usuarios => res.status(200).send(usuarios))
-			.catch(error => res.status(400).send(error))
-	},
+  list(_, res, next) {
+    return usuario
+      .findAll({})
+      .then((usuarios) => res.status(200).send(usuarios))
+      .catch((error) => res.status(400).send(error));
+  },
 
-	findUserByUsername(req, res, next) {
-		return users.findOne({ where: { username: req.body.username } })
-			.then(usuarios => res.status(200).send(usuarios))
-			.catch(error => res.status(400).send(error))
-	},
+  // async getById(req, res) {
+  // 	return juego.findOne({
+  // 		where: { id: req.query.id },
+  // 		include: [{
+  // 			model: nivel,
+  // 			as: 'niveles',
+  // 			include: [{
+  // 				model: palabra,
+  // 				as: 'palabras'
+  // 			},
+  // 			{
+  // 				model: preguntas,
+  // 				as: 'preguntas',
+  // 		 	},
+  // 			{
+  // 				model: opcion,
+  // 				as: 'opciones',
+  // 				include: [{
+  // 					model: opcionValor,
+  // 					as: 'valores'
+  // 				}]
+  // 			}],
+  // 		}]
+  // 	})
+  // 		.then(juego => res.status(200).send(juego))
+  // 		.catch(error => res.status(400).send(error))
+  // },
 };

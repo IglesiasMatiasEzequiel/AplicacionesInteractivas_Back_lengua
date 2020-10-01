@@ -1,29 +1,38 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Nivels', {
+    return queryInterface.createTable('Cuenta', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idJuego: {
+      idUsuario: {
         type: Sequelize.INTEGER
       },
-      name: {
+      idBanco: {
+        type: Sequelize.INTEGER
+      },
+      idEntidadEmisora: {
+        type: Sequelize.INTEGER
+      },
+      cbu: {
         type: Sequelize.STRING
       },
-      title: {
+      alias: {
         type: Sequelize.STRING
       },
-      description: {
+      descripcion: {
         type: Sequelize.STRING
       },
-      statement: {
-        type: Sequelize.STRING
+      vencimiento: {
+        type: Sequelize.DATE
       },
-      levelScore: {
+      monto: {
+        type: Sequelize.FLOAT
+      },
+      tarjeta: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -37,6 +46,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Nivels');
+    return queryInterface.dropTable('Cuenta');
   }
 };

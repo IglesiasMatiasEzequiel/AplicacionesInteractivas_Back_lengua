@@ -1,33 +1,36 @@
 'use strict';
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Preguntas', {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('Inversiones', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idNivel: {
+      idUsuario: {
         type: Sequelize.INTEGER
       },
-      idPregunta: {
+      idTipo: {
         type: Sequelize.INTEGER
       },
-      respuesta: {
+      idCuenta: {
         type: Sequelize.INTEGER
       },
-      pregunta: {
+      fechaInicio: {
+        type: Sequelize.DATE
+      },
+      fechaVencimiento: {
+        type: Sequelize.DATE
+      },
+      monto: {
+        type: Sequelize.FLOAT
+      },
+      nombre: {
         type: Sequelize.STRING
       },
-      opcion1: {
-        type: Sequelize.STRING
-      },
-      opcion2: {
-        type: Sequelize.STRING
-      },
-      opcion3: {
-        type: Sequelize.STRING
+      duracion: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -39,7 +42,7 @@ module.exports = {
       }
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Preguntas');
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('Inversiones');
   }
 };

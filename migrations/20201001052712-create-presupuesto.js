@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Participacions', {
+    return queryInterface.createTable('Presupuestos', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,14 +11,14 @@ module.exports = {
       idUsuario: {
         type: Sequelize.INTEGER
       },
-      idJuego: {
+      idCategoriaEgreso: {
         type: Sequelize.INTEGER
       },
-      idNivel: {
-        type: Sequelize.INTEGER
+      fechaInicio: {
+        type: Sequelize.DATE
       },
-      puntaje: {
-        type: Sequelize.INTEGER
+      monto: {
+        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +31,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Participacions');
+    return queryInterface.dropTable('Presupuestos');
   }
 };

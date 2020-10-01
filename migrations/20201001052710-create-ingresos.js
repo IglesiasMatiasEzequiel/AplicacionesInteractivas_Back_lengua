@@ -1,24 +1,36 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Palabras', {
+    return queryInterface.createTable('Ingresos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idNivel: {
+      idUsuario: {
         type: Sequelize.INTEGER
       },
-      palabra: {
-        type: Sequelize.TEXT
-      },
-      silabas: {
+      idTipoIngreso: {
         type: Sequelize.INTEGER
       },
-      imgPath: {
-        type: Sequelize.TEXT
+      idCategoriaIngreso: {
+        type: Sequelize.INTEGER
+      },
+      idDestinoIngreso: {
+        type: Sequelize.INTEGER
+      },
+      idCuenta: {
+        type: Sequelize.INTEGER
+      },
+      fecha: {
+        type: Sequelize.DATE
+      },
+      monto: {
+        type: Sequelize.FLOAT
+      },
+      descripcion: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +43,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Palabras');
+    return queryInterface.dropTable('Ingresos');
   }
 };

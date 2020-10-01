@@ -1,18 +1,33 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('OpcionValors', {
+    return queryInterface.createTable('Tarjeta', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idOpcion: {
+      idUsuario: {
         type: Sequelize.INTEGER
       },
-      valor: {
+      idBanco: {
         type: Sequelize.INTEGER
+      },
+      idEntidadEmisora: {
+        type: Sequelize.INTEGER
+      },
+      tarjeta: {
+        type: Sequelize.INTEGER
+      },
+      vencimiento: {
+        type: Sequelize.DATE
+      },
+      cierreResumen: {
+        type: Sequelize.DATE
+      },
+      vencimientoResumen: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -25,6 +40,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('OpcionValors');
+    return queryInterface.dropTable('Tarjeta');
   }
 };
