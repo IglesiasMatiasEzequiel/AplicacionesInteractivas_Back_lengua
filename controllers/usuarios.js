@@ -11,111 +11,125 @@ module.exports = {
   backup(req, res) {
     var promises = [];
 
-    req.body.ingresos.map((item) => {
-      promises.push(
-        ingresos.create({
-          idUsuario: item.idUsuario,
-          idTipoIngreso: item.idTipoIngreso,
-          idCategoriaIngreso: item.idCategoriaIngreso,
-          idDestinoIngreso: item.idDestinoIngreso,
-          idCuenta: item.idCuenta,
-          fecha: item.fecha,
-          idCuenta: item.descripcion,
-          monto: item.monto,
-          descripcion: item.descripcion,
-        })
-      );
-    });
+    if (req.body.ingresos != null && req.body.ingresos != undefined) {
+      req.body.ingresos.map((item) => {
+        promises.push(
+          ingresos.create({
+            idUsuario: item.idUsuario,
+            idTipoIngreso: item.idTipoIngreso,
+            idCategoriaIngreso: item.idCategoriaIngreso,
+            idDestinoIngreso: item.idDestinoIngreso,
+            idCuenta: item.idCuenta,
+            fecha: item.fecha,
+            idCuenta: item.descripcion,
+            monto: item.monto,
+            descripcion: item.descripcion,
+          })
+        );
+      });
+    }
 
-    req.body.egresos.map((item) => {
-      promises.push(
-        egresos.create({
-          idUsuario: item.idUsuario,
-          idTipoEgreso: item.idTipoEgreso,
-          idCategoriaEgreso: item.idCategoriaEgreso,
-          idMedioPago: item.idMedioPago,
-          idTarjeta: item.idTarjeta,
-          idCuenta: item.idCuenta,
-          fecha: item.fecha,
-          monto: item.monto,
-          detalleEgreso: item.detalleEgreso,
-          cuotas: item.cuotas,
-          nroCuota: item.nroCuota,
-          proxVencimiento: item.proxVencimiento,
-        })
-      );
-    });
+    if (req.body.egresos != null && req.body.egresos != undefined) {
+      req.body.egresos.map((item) => {
+        promises.push(
+          egresos.create({
+            idUsuario: item.idUsuario,
+            idTipoEgreso: item.idTipoEgreso,
+            idCategoriaEgreso: item.idCategoriaEgreso,
+            idMedioPago: item.idMedioPago,
+            idTarjeta: item.idTarjeta,
+            idCuenta: item.idCuenta,
+            fecha: item.fecha,
+            monto: item.monto,
+            detalleEgreso: item.detalleEgreso,
+            cuotas: item.cuotas,
+            nroCuota: item.nroCuota,
+            proxVencimiento: item.proxVencimiento,
+          })
+        );
+      });
+    }
 
-    req.body.cuentas.map((item) => {
-      promises.push(
-        cuentas.create({
-          idUsuario: item.idUsuario,
-          idBanco: item.idBanco,
-          idEntidadEmisora: item.idEntidadEmisora,
-          cbu: item.cbu,
-          alias: item.alias,
-          descripcion: item.descripcion,
-          vencimiento: item.vencimiento,
-          monto: item.monto,
-          tarjeta: item.tarjeta,
-        })
-      );
-    });
+    if (req.body.cuentas != null && req.body.cuentas != undefined) {
+      req.body.cuentas.map((item) => {
+        promises.push(
+          cuentas.create({
+            idUsuario: item.idUsuario,
+            idBanco: item.idBanco,
+            idEntidadEmisora: item.idEntidadEmisora,
+            cbu: item.cbu,
+            alias: item.alias,
+            descripcion: item.descripcion,
+            vencimiento: item.vencimiento,
+            monto: item.monto,
+            tarjeta: item.tarjeta,
+          })
+        );
+      });
+    }
 
-    req.body.tarjetas.map((item) => {
-      promises.push(
-        tarjetas.create({
-          idUsuario: item.idUsuario,
-          idBanco: item.idBanco,
-          idEntidadEmisora: item.idEntidadEmisora,
-          tarjeta: item.tarjeta,
-          vencimiento: item.vencimiento,
-          cierreResumen: item.cierreResumen,
-          vencimientoResumen: item.vencimientoResumen
-        })
-      );
-    });
+    if (req.body.tarjetas != null && req.body.tarjetas != undefined) {
+      req.body.tarjetas.map((item) => {
+        promises.push(
+          tarjetas.create({
+            idUsuario: item.idUsuario,
+            idBanco: item.idBanco,
+            idEntidadEmisora: item.idEntidadEmisora,
+            tarjeta: item.tarjeta,
+            vencimiento: item.vencimiento,
+            cierreResumen: item.cierreResumen,
+            vencimientoResumen: item.vencimientoResumen,
+          })
+        );
+      });
+    }
 
-    req.body.inversiones.map((item) => {
-      promises.push(
-        inversiones.create({
-          idUsuario: item.idUsuario,
-          idTipo: item.idTipo,
-          idCuenta: item.idCuenta,
-          fechaInicio: item.fechaInicio,
-          fechaVencimiento: item.fechaVencimiento,
-          monto: item.monto,
-          nombre: item.nombre,
-          duracion: item.duracion
-        })
-      );
-    });
+    if (req.body.inversiones != null && req.body.inversiones != undefined) {
+      req.body.inversiones.map((item) => {
+        promises.push(
+          inversiones.create({
+            idUsuario: item.idUsuario,
+            idTipo: item.idTipo,
+            idCuenta: item.idCuenta,
+            fechaInicio: item.fechaInicio,
+            fechaVencimiento: item.fechaVencimiento,
+            monto: item.monto,
+            nombre: item.nombre,
+            duracion: item.duracion,
+          })
+        );
+      });
+    }
 
-    req.body.prestamos.map((item) => {
-      promises.push(
-        prestamos.create({
-          idUsuario: item.idUsuario,
-          idTipo: item.idTipo,
-          idCuenta: item.idCuenta,
-          emisorDesinatario: item.emisorDesinatario,
-          intereses: item.intereses,
-          monto: item.monto,
-          cuota: item.cuota,
-          vencimiento: item.vencimiento,
-        })
-      );
-    });
+    if (req.body.prestamos != null && req.body.prestamos != undefined) {
+      req.body.prestamos.map((item) => {
+        promises.push(
+          prestamos.create({
+            idUsuario: item.idUsuario,
+            idTipo: item.idTipo,
+            idCuenta: item.idCuenta,
+            emisorDesinatario: item.emisorDesinatario,
+            intereses: item.intereses,
+            monto: item.monto,
+            cuota: item.cuota,
+            vencimiento: item.vencimiento,
+          })
+        );
+      });
+    }
 
-    req.body.presupuestos.map((item) => {
-      promises.push(
-        presupuestos.create({
-          idUsuario: item.idUsuario,
-          idCategoriaEgreso: item.idCategoriaEgreso,
-          fechaInicio: item.fechaInicio,
-          monto: item.monto,
-        })
-      );
-    });
+    if (req.body.presupuestos != null && req.body.presupuestos != undefined) {
+      req.body.presupuestos.map((item) => {
+        promises.push(
+          presupuestos.create({
+            idUsuario: item.idUsuario,
+            idCategoriaEgreso: item.idCategoriaEgreso,
+            fechaInicio: item.fechaInicio,
+            monto: item.monto,
+          })
+        );
+      });
+    }
 
     return Promise.all(promises)
       .then((items) => res.status(200).json({ status: 200 }))
