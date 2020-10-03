@@ -6,6 +6,7 @@ module.exports = (app) => {
 		message: 'Example project did not give you access to the api web services',
 	}));
 
+	app.post('/api/login', usuariosController.login);
 	app.post('/api/createUsuario', usuariosController.createUsuario);
 	app.post('/api/backup', usuariosController.backup);
 	app.post('/api/deleteByIdUsuario', usuariosController.deleteByIdUsuario);

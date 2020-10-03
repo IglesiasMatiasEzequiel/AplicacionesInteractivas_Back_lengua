@@ -8,6 +8,20 @@ const prestamos = require("../models").Prestamos;
 const presupuestos = require("../models").Presupuesto;
 
 module.exports = {
+  login(req, res) {
+    return usuarios
+      .findOne({
+        where: {
+          email: req.body.email,
+          password: req.body.password,
+        },
+      })
+      .then((user) => {
+        return res.status(200).json({ status: 200, items: user });
+      })
+      .catch((error) => res.status(400).json({ status: 400, error: error }));
+  },
+
   backup(req, res) {
     var promises = [];
 
